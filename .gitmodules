@@ -1,0 +1,3 @@
+[submodule "visibility"]
+	path = visibility
+	url = https://github.com/trylock/visibility.git
