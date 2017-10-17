@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='lightvolume',
-    version='0.1',
+    version='0.1.post1',
     author='Daniel Pope',
     author_email='mauve@mauveweb.co.uk',
     url='https://github.com/lordmauve/lightvolume',
