@@ -1,2 +1,3 @@
 include lightvolume.h
 include lightvolume.cpp
+recursive-include visibility *.hpp LICENSE *.md
