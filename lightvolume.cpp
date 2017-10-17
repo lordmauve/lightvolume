@@ -56,21 +56,31 @@ vec2 light = {
 unsigned int vbo;
 
 
-void draw_visibility() {
+void
+draw_visibility(
+      float light_x,
+      float light_y,
+      const float *segments,
+      unsigned int num_segments) {
     std::vector<line_segment> vsegments;
-    for (int i = 0; i < sizeof segments / sizeof(float); i += 4) {
+
+    for (unsigned int i = 0; i < num_segments; i += 1) {
+      unsigned int off = i * 4;
       line_segment seg = line_segment {
-	vec2 {segments[i], segments[i + 1]},
-	vec2 {segments[i + 2], segments[i + 3]},
+	vec2 {segments[off], segments[off + 1]},
+	vec2 {segments[off + 2], segments[off + 3]},
       };
       vsegments.push_back(seg);
     }
-    std::vector<vec2> result = visibility_polygon(light, vsegments);
+    std::vector<vec2> result = visibility_polygon(
+      vec2 {light_x, light_y},
+      vsegments
+    );
 
     unsigned int vbo_size = 4 + (unsigned int) result.size() * 2;
     float *vs = new float[vbo_size];
-    vs[0] = light.x;
-    vs[1] = light.y;
+    vs[0] = light_x;
+    vs[1] = light_y;
 
     float *pos = vs + 2;
 
@@ -101,6 +111,7 @@ void draw_visibility() {
 }
 
 
+
 void drawCenter(void) {
    // Draw a Red 1x1 Square centered at origin
    glBegin(GL_LINE_LOOP);              // Each set of 4 vertices form a quad
@@ -122,7 +133,7 @@ display(void) {
     glScalef(1.0f / 250.0f, 1.0f / 250.0f, 1.0f);
     glColor3f(1.0f, 1.0f, 0.0f);
     glDisable(GL_CULL_FACE);
-  draw_visibility();
+  draw_visibility(light.x, light.y, segments, sizeof segments / sizeof segments[0]);
   drawCenter();
   glutSwapBuffers();
 }
