@@ -8,7 +8,7 @@
 
 using namespace geometry;
 
-const float segments[] = {
+const float def_segments[] = {
   0.0f, 0.0f,
   0.0f, 500.0f,
   0.0f, 500.0f,
@@ -56,19 +56,18 @@ vec2 light = {
 unsigned int vbo;
 
 
-void
+extern "C" void
 draw_visibility(
       float light_x,
       float light_y,
       const float *segments,
-      unsigned int num_segments) {
+      unsigned int num_coords) {
     std::vector<line_segment> vsegments;
 
-    for (unsigned int i = 0; i < num_segments; i += 1) {
-      unsigned int off = i * 4;
+    for (unsigned int i = 0; i < num_coords; i += 4) {
       line_segment seg = line_segment {
-	vec2 {segments[off], segments[off + 1]},
-	vec2 {segments[off + 2], segments[off + 3]},
+	vec2 {segments[i], segments[i + 1]},
+	vec2 {segments[i + 2], segments[i + 3]},
       };
       vsegments.push_back(seg);
     }
@@ -133,7 +132,7 @@ display(void) {
     glScalef(1.0f / 250.0f, 1.0f / 250.0f, 1.0f);
     glColor3f(1.0f, 1.0f, 0.0f);
     glDisable(GL_CULL_FACE);
-  draw_visibility(light.x, light.y, segments, sizeof segments / sizeof segments[0]);
+  draw_visibility(light.x, light.y, def_segments, sizeof def_segments / sizeof def_segments[0]);
   drawCenter();
   glutSwapBuffers();
 }
