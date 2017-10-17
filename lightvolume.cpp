@@ -1,8 +1,6 @@
 #define GL_GLEXT_PROTOTYPES
 
 #include <GL/glu.h>
-#include <GL/glut.h>
-#include <stdio.h>
 #include "visibility/visibility.hpp"
 
 
@@ -110,7 +108,7 @@ draw_visibility(
 }
 
 
-
+/*
 void drawCenter(void) {
    // Draw a Red 1x1 Square centered at origin
    glBegin(GL_LINE_LOOP);              // Each set of 4 vertices form a quad
@@ -136,34 +134,9 @@ display(void) {
   drawCenter();
   glutSwapBuffers();
 }
+*/
 
 
-void
-init(void) {
-
+extern "C" void init(void) {
   glGenBuffers(1, &vbo);
-
-  //Force display to be drawn now
-  glFlush();
-}
-
-
-void
-mouseMove(int x, int y) {
-  light.x = (float) x;
-  light.y = (float) (500 - y);
-  glutPostRedisplay();
-}
-
-int
-main(int argc, char **argv) {
-  glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-  glutInitWindowSize(500, 500);
-  glutCreateWindow("Lighting demo");
-  glutDisplayFunc(display);
-  glutMotionFunc(mouseMove);
-  init();
-  glutMainLoop();
-  return 0;
 }
