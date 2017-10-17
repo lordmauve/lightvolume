@@ -1,3 +1,5 @@
 include lightvolume.h
 include lightvolume.cpp
+include README.rst
+include LICENSE
 recursive-include visibility *.hpp LICENSE *.md

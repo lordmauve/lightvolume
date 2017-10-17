@@ -7,6 +7,7 @@ setup(
     author='Daniel Pope',
     author_email='mauve@mauveweb.co.uk',
     url='https://github.com/lordmauve/lightvolume',
+    py_modules=['lightvolume'],
     install_requires=[
         'cffi>=1.11',
     ],
