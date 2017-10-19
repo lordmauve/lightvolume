@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='lightvolume',
-    version='0.1.1',
+    version='0.1.2',
     author='Daniel Pope',
     author_email='mauve@mauveweb.co.uk',
     description="Light volume calculation and rendering with OpenGL",

@@ -105,6 +105,10 @@ draw_visibility(
 
     //Actually draw the triangle, giving the number of vertices provided
     glDrawArrays(GL_TRIANGLE_FAN, 0, vbo_size / 2);
+
+    // Disable state change
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 
