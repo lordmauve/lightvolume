@@ -6,19 +6,7 @@ from cffi import FFI
 ffibuilder = FFI()
 
 root = os.path.abspath(os.path.dirname(__file__))
-visibility = os.path.join(root, 'visibility')
-
-if not os.path.isdir(visibility):
-    sys.exit(
-        "The 'visibility' Git subrepository is not present. "
-        "Try cloning from https://github.com/trylock/visibility/"
-    )
-else:
-    print('Files present:')
-    for path, dirs, files in os.walk(visibility):
-        print(path + '/')
-        for f in files:
-            print(os.path.join(path, f))
+visibility = os.path.join(root, 'vendor', 'visibility')
 
 
 ffibuilder.set_source("_lightvolume",
