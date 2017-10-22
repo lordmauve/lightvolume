@@ -1,53 +1,16 @@
 #define GL_GLEXT_PROTOTYPES
 
+#ifdef _MSC_VER
+// windows.h is needed for OpenGL on Windows
+#include <windows.h>
+#endif
+
+#include <GL/gl.h>
 #include <GL/glu.h>
 #include "visibility/visibility.hpp"
 
 
 using namespace geometry;
-
-const float def_segments[] = {
-  0.0f, 0.0f,
-  0.0f, 500.0f,
-  0.0f, 500.0f,
-  500.0f, 500.0f,
-  500.0f, 500.0f,
-  500.0f, 0.0f,
-  500.0f, 0.0f,
-  0.0f, 0.0f,
-
-  300.0f, 300.0f,
-  300.0f, 400.0f,
-  300.0f, 400.0f,
-  400.0f, 400.0f,
-  400.0f, 400.0f,
-  400.0f, 300.0f,
-  400.0f, 300.0f,
-  300.0f, 300.0f,
-
-  60.0f, 20.0f,
-  70.0f, 20.0f,
-  70.0f, 20.0f,
-  70.0f, 30.0f,
-  70.0f, 30.0f,
-  60.0f, 30.0f,
-  60.0f, 30.0f,
-  60.0f, 20.0f,
-
-  100.0f, 20.0f,
-  120.0f, 20.0f,
-  120.0f, 20.0f,
-  120.0f, 30.0f,
-  120.0f, 30.0f,
-  100.0f, 30.0f,
-  100.0f, 30.0f,
-  100.0f, 20.0f,
-};
-
-
-vec2 light = {
-  30.0f, 50.0f
-};
 
 
 // The id of the VBO that will be used for rendering
@@ -110,35 +73,6 @@ draw_visibility(
     glDisableClientState(GL_VERTEX_ARRAY);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
-
-
-/*
-void drawCenter(void) {
-   // Draw a Red 1x1 Square centered at origin
-   glBegin(GL_LINE_LOOP);              // Each set of 4 vertices form a quad
-      glColor3f(1.0f, 0.0f, 0.0f); // Red
-      glVertex2f(0.0f, 0.0f);    // x, y
-      glVertex2f(0.0f, 500.0f);
-      glVertex2f(500.0f,  500.0f);
-      glVertex2f(500.0f,  0.0f);
-   glEnd();
-}
-
-
-void
-display(void) {
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glTranslatef(-1.0f, -1.0f, 0.0f);
-    glScalef(1.0f / 250.0f, 1.0f / 250.0f, 1.0f);
-    glColor3f(1.0f, 1.0f, 0.0f);
-    glDisable(GL_CULL_FACE);
-  draw_visibility(light.x, light.y, def_segments, sizeof def_segments / sizeof def_segments[0]);
-  drawCenter();
-  glutSwapBuffers();
-}
-*/
 
 
 extern "C" void init(void) {
