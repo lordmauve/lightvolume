@@ -15,13 +15,28 @@ USE_GLEW = (
     os.environ.get('USE_GLEW')
 )
 
+include_dirs = [root, visibility]
+library_dirs = []
 
 if sys.platform == 'win32':
+    IS_64BIT = sys.maxsize > 2 ** 32
+
     extra_compile_args = ['/std:c++14']
     libraries = ['opengl32', 'glu32']
     if USE_GLEW:
         extra_compile_args += ['/DUSE_GLEW']
         libraries += ['glew32']
+
+        glew_path = os.path.join(root, 'vendor', 'glew-2.1.0')
+        extra_include_dirs += [
+            os.path.join(glew_path, 'include')
+        ]
+        extra_lib_dirs += [
+            os.path.join(
+                glew_path, 'lib', 'Release',
+                'x64' if IS_64BIT else 'Win32'
+            )
+        ]
 else:
     extra_compile_args = ['-std=c++14']
     libraries = ['GL', 'GLU']
@@ -37,7 +52,8 @@ ffibuilder.set_source(
     """,
     libraries=libraries,
     sources=['lightvolume.cpp'],
-    include_dirs=[root, visibility],
+    include_dirs=include_dirs,
+    library_dirs=library_dirs,
     extra_compile_args=extra_compile_args,
 )
 
