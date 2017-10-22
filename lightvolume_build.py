@@ -1,4 +1,5 @@
 """CFFI build script for lightvolume library."""
+from __future__ import print_function
 import sys
 import os.path
 from cffi import FFI
@@ -12,6 +13,12 @@ if not os.path.isdir(visibility):
         "The 'visibility' Git subrepository is not present. "
         "Try cloning from https://github.com/trylock/visibility/"
     )
+else:
+    print('Files present:')
+    for path, dirs, files in os.walk(visibility):
+        print(path + '/')
+        for f in files:
+            print(os.path.join(path, f))
 
 
 ffibuilder.set_source("_lightvolume",
