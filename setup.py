@@ -15,4 +15,15 @@ setup(
     ],
     setup_requires=['cffi>=1.11'],
     cffi_modules=["lightvolume_build.py:ffibuilder"],
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Topic :: Multimedia :: Graphics',
+        'License :: OSI Approved :: BSD License',
+        'Intended Audience :: Developers',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: Microsoft :: Windows',
+        'Operating System :: POSIX',
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+    ],
 )
