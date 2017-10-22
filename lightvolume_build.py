@@ -8,6 +8,11 @@ ffibuilder = FFI()
 root = os.path.abspath(os.path.dirname(__file__))
 visibility = os.path.join(root, 'vendor', 'visibility')
 
+if sys.platform == 'win32':
+    extra_compile_args = ['/std:c++14']
+else:
+    extra_compile_args = ['-std=c++14']
+
 
 ffibuilder.set_source("_lightvolume",
    r"""
@@ -16,7 +21,7 @@ ffibuilder.set_source("_lightvolume",
     libraries=['GL', 'GLU'],
     sources=['lightvolume.cpp'],
     include_dirs=[root, visibility],
-    extra_compile_args=['-std=c++14'],
+    extra_compile_args=extra_compile_args,
 )
 
 
