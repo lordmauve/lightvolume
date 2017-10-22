@@ -8,17 +8,34 @@ ffibuilder = FFI()
 root = os.path.abspath(os.path.dirname(__file__))
 visibility = os.path.join(root, 'vendor', 'visibility')
 
+# Use GLEW to load OpenGL extensions on Windows only for now
+# Set the USE_GLEW=1 environment variable to force
+USE_GLEW = (
+    sys.platform == 'win32' or
+    os.environ.get('USE_GLEW')
+)
+
+
 if sys.platform == 'win32':
     extra_compile_args = ['/std:c++14']
+    libraries = ['opengl32', 'glu32']
+    if USE_GLEW:
+        extra_compile_args += ['/DUSE_GLEW']
+        libraries += ['glew32']
 else:
     extra_compile_args = ['-std=c++14']
+    libraries = ['GL', 'GLU']
+    if USE_GLEW:
+        extra_compile_args += ['-DUSE_GLEW']
+        libraries += ['GLEW']
 
 
-ffibuilder.set_source("_lightvolume",
-   r"""
+ffibuilder.set_source(
+    "_lightvolume",
+    r"""
     #include "lightvolume.h"
     """,
-    libraries=['GL', 'GLU'],
+    libraries=libraries,
     sources=['lightvolume.cpp'],
     include_dirs=[root, visibility],
     extra_compile_args=extra_compile_args,

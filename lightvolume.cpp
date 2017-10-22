@@ -5,8 +5,13 @@
 #include <windows.h>
 #endif
 
+#ifdef USE_GLEW
+#include <GL/glew.h>
+#else
 #include <GL/gl.h>
 #include <GL/glu.h>
+#endif
+
 #include "visibility/visibility.hpp"
 
 
@@ -76,5 +81,13 @@ draw_visibility(
 
 
 extern "C" void init(void) {
+#ifdef USE_GLEW
+  GLenum err = glewInit();
+  if (GLEW_OK != err) {
+      /* Problem: glewInit failed, something is seriously wrong. */
+      fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+  }
+#endif
+
   glGenBuffers(1, &vbo);
 }
