@@ -28,10 +28,10 @@ if sys.platform == 'win32':
         libraries += ['glew32']
 
         glew_path = os.path.join(root, 'vendor', 'glew-2.1.0')
-        extra_include_dirs += [
+        include_dirs += [
             os.path.join(glew_path, 'include')
         ]
-        extra_lib_dirs += [
+        library_dirs += [
             os.path.join(
                 glew_path, 'lib', 'Release',
                 'x64' if IS_64BIT else 'Win32'
