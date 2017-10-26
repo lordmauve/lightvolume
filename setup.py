@@ -14,7 +14,7 @@ if USE_GLEW:
         IS_64BIT = sys.maxsize > 2 ** 32
         plat = 'x64' if IS_64BIT else 'Win32'
         dll = 'vendor/glew-2.1.0/bin/Release/%s/glew32.dll' % plat
-        data_files.append(('/', [dll]))
+        data_files.append(('.\\', [dll]))
 
 setup(
     name='lightvolume',
