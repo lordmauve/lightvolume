@@ -1,5 +1,5 @@
 /* Initalise the library (allocate VBO). */
-void init(void);
+int init(void);
 
 
 /* Draw a visibility volume. */

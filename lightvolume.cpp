@@ -80,14 +80,22 @@ draw_visibility(
 }
 
 
-extern "C" void init(void) {
+extern "C" int init(void) {
 #ifdef USE_GLEW
   GLenum err = glewInit();
   if (GLEW_OK != err) {
       /* Problem: glewInit failed, something is seriously wrong. */
       fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+      return 1;
+  }
+
+  if (!GLEW_VERSION_1_5) {
+      /* VBO functions are not available in this version of OpenGL */
+      fprintf(stderr, "Error: OpenGL driver does not support OpenGL 1.5");
+      return 2;
   }
 #endif
 
   glGenBuffers(1, &vbo);
+  return 0;
 }

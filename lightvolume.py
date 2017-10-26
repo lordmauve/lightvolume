@@ -6,8 +6,11 @@ __metaclass__ = type
 
 
 # Initialise the library (allocate VBO)
-lib.init()
-
+res = lib.init()
+if res == 2:
+    raise ImportError("Driver does not support required OpenGL features")
+elif res:
+    raise ImportError("Error initialising _lightvolume library")
 
 
 class rect:
